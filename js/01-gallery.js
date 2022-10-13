@@ -31,15 +31,16 @@ function onOpenModal(evt) {
     }
     const instance = basicLightbox.create(`
     <img src="${evt.target.dataset.source}" width="800" height="600">
-    `);
+    `,
+    { onClose: () => window.removeEventListener('keydown', onCloseModal) });
+    
     instance.show()
 
     window.addEventListener('keydown', onCloseModal);
 
     function onCloseModal(evt) {
         if (evt.code === 'Escape') {
-            instance.close()
-            window.removeEventListener('keydown', onCloseModal);
-    }
+            instance.close();
+        };
     };
 };
